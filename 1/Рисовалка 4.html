@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPaint</title>
+</head>
+<body>
+    <div>
+        <canvas id="canvas" width="800" height="600" style="border: solid"></canvas>
+    </div>
+     <div>
+        <input type="color" id="color">
+        <input type="text" id="width">
+    </div>
+    <div>
+        <button id = "btn1" onclick="choise('Kvadrat')">Kvadrat</button>
+        <button id = "btn2" onclick="choise('Oval')">Oval</button>
+        <button id = "btn3" onclick="choise('Curve')">Curve</button>
+        <button id = "btn4" onclick="choise('Line')">Line</button>
+    </div>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var type;
+        var x;
+        var y;
+
+        function choise(a)
+            {
+                type = a;
+            }
+
+        canvas.onmousedown = function (e) 
+            {
+                x = e.x;
+                y = e.y;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+        
+        canvas.onmouseup = function (e) 
+            {
+                switch (type) 
+                {
+                    case 'Kvadrat': ctx.strokeRect(x, y, e.x - x, e.y - y); break;
+                    case 'Oval':ctx.beginPath();
+                                ctx.ellipse(x, y, e.x - x, e.y - y, 0, 0, 2 * Math.PI, false);
+                                ctx.stroke();
+                                break;
+                    case 'Curve':
+                            var height = e.y - y;
+                            var width = e.x - x;
+                            var radius = (width / height) * 4;
+                            ctx.moveTo(x, y + radius);
+                            ctx.lineTo(x, y + height - radius);
+                            ctx.quadraticCurveTo(x, y + height, x + radius, y + height);
+                            ctx.lineTo(x + width - radius, y + height);
+                            ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
+                            ctx.lineTo(x + width, y + radius);
+                            ctx.quadraticCurveTo(x + width, y, x + width - radius, y);
+                            ctx.lineTo(x + radius, y);
+                            ctx.quadraticCurveTo(x, y, x, y + radius);
+                            ctx.stroke();
+                            break;
+                    case 'Line': ctx.lineTo(e.x, e.y);
+                                 ctx.stroke();
+                                 break;
+                }
+            }
+       
+
+        document.getElementById('color').oninput = function()
+        {
+            ctx.strokeStyle = this.value;
+        }
+
+        document.getElementById('width').oninput = function()
+        {
+            ctx.lineWidth = this.value;
+        }
+
+    </script>
+</body>
+</html>

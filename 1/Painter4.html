@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Painter</title>
+</head>
+<body>
+    
+    <script>
+        window.onmousedown = mDown;
+        window.onmouseup = mUp;
+        var p;
+        var k;
+        var count = 1;
+        var mouseOffset;
+       
+
+
+        function mDown(e)
+        {
+            p = new Object();
+            p.x = e.x;
+            p.y = e.y;
+        }
+
+        function mUp(e)
+        {
+            var node = document.createElement('div');
+            node.className = 'BShape';
+            node.tabIndex = ++count;
+            node.style.left = p.x + 'px';
+            node.style.top = p.y + 'px';
+            node.style.width = (e.x - p.x) + 'px';
+            node.style.height = (e.y - p.y) + 'px';
+            
+            node.onmousedown = mDDown;
+            node.onmousemove = mDMove;
+            document.body.appendChild(node);
+        }
+
+        function mDDown(e)
+        {
+           
+            k = new Object();
+            k.x = e.x;
+            k.y = e.y;
+
+            ttop = (k.y-this.offsetTop);
+            left = (k.x-this.offsetLeft);
+            
+// отменить создание нового квадрата
+       window.onmouseup = function () { return false }
+        
+
+            
+        }
+        
+
+        function mDMove(e)
+        {
+            // отменить создание нового квадрата
+     //  window.onmouseup = function() { return false }
+            var x = e.pageX;
+            var y = e.pageY;
+         if (e.buttons == 1)
+         {
+             // this.style.left = (this.offsetLeft + (e.x - k.x)+'px');
+             // this.style.top = (this.offsetTop + (e.y - k.y)+'px');
+            
+           // this.style.left = e.pageX - (k.x-this.offsetLeft)  + 'px';
+           //  this.style.top = e.pageY - (k.y-this.offsetTop) + 'px';
+
+            this.style.top = y - ttop + 'px';
+            this.style.left = x - left  + 'px';
+            
+            
+            // this.style.left = e.pageX - (this.offsetLeft-k.x)  + 'px';
+            // this.style.top = e.pageY - (this.offsetTop-k.y) + 'px';
+
+            // this.style.left = e.pageX   + 'px';
+            // this.style.top = e.pageY  + 'px';
+            
+         }
+        }
+    </script>
+<style>
+    .BShape
+    {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 0px;
+        height: 0px;
+        background: yellow;
+    }
+
+    .BShape:focus 
+    {
+        position: absolute;
+        background: blue;
+    }
+</style>
+</body>
+</html>

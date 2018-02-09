@@ -1,0 +1,64 @@
+<input type="hidden" id='hOp' value=""/>
+<input type="text" id='field' value=""/><p>
+
+<input type="button" id='1' value=" 1 " onclick="Number(1)"/> 
+<input type="button" id='2' value=" 2 " onclick="Number(2)"/>
+<input type="button" id='3' value=" 3 " onclick="Number(3)"/>
+<input type="button" id="+" value=" + " onclick="Operation('+')"/><p>
+
+<input type="button" id='4' value=" 4 " onclick="Number(4)"/> 
+<input type="button" id='5' value=" 5 " onclick="Number(5)"/>
+<input type="button" id='6' value=" 6 " onclick="Number(6)"/>
+<input type="button" id='-' value=" - " onclick="Operation('-')"/><p>
+
+<input type="button" id='7' value=" 7 " onclick="Number(7)"/> 
+<input type="button" id='8' value=" 8 " onclick="Number(8)"/>
+<input type="button" id='9' value=" 9 " onclick="Number(9)"/>
+<input type="button" id='*' value=" * " onclick="Operation('*')"/><p>
+
+<input type="button" id='0' value=" 0 " onclick="Number(0)"/> 
+<input type="button" id='CF' value=" CF " onclick="CleanField()"/>
+<input type="button" id='=' value=" = " onclick="Operation('=')"/>
+<input type="button" id='/' value=" / " onclick="Operation('/')"/><p>
+
+<script>
+var tempA=0;
+//ar Oper = documert.getElementy(By.id("hOp"));
+
+
+	function Number(num)
+	{
+		field.value = field.value + num;
+	}
+	function Operation(op)
+	{
+		if (op == '=' )
+		{
+			var a = parseInt(tempA);
+			var b = parseInt(field.value);
+			field.value = calc ( a,b,op);
+		}
+		else 
+		{
+			tempA = field.value;
+			field.value = "";
+			hOp.value = op;
+		}	
+	}
+	function calc(a,b,op)
+	{
+		var res = 0;
+		switch(hOp.value)
+		{
+			case '+': res = a + b; break;
+			case '-': res = a - b; break;
+			case '*': res = a * b; break;
+			case '/': res = a / b; break;
+		}
+		return res;
+	}
+	function CleanField()
+		{
+			field.value = "";
+		}
+</script>

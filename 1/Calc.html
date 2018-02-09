@@ -1,0 +1,28 @@
+<input type="txt" id="a" value= ""/><p>
+
+<input type="txt" id="op" value= ""/><p>
+<input type="txt" id="b" value= ""/><p>
+<input type="txt" id="res" value= ""/><p>
+<input type="button"  id="Click" value="Click" onclick="ff()" />
+<script>
+function ff()
+	{	
+	if (op.value=='+')
+		{
+			res.value = parseInt(a.value) + parseInt(b.value);
+		}
+	if (op.value=='-')
+		{
+			res.value = parseInt(a.value) - parseInt(b.value);
+		}
+	if (op.value=='*')
+		{
+			res.value = parseInt(a.value) * parseInt(b.value);
+		}
+	if (op.value=='/')
+		{
+			res.value = parseInt(a.value) / parseInt(b.value);
+		}
+	}
+	
+</script>

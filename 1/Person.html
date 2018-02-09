@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <style>
+    .container{overflow: hidden}
+    .tab{
+        float: left;}
+        .tab-2{margin-left: 50px}
+        .tab-2 input{display: block; margin-bottom: 10px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tab tab-1">
+            <table id="table" border="2">
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                </tr>
+
+            </table>
+        </div>
+        <div class="tab tab-2">
+            ID:<input type="number" name="id" id="id">
+            First name:<input type="text" name="fname" id="fname">
+            Last Name:<input type="text" name="lname" id="lname">
+            Age:<input type="number" name="age" id="age">
+
+            <button onclick="addTableRow();">Create</button>
+            
+            <button onclick="ReadDb();">Read</button>
+            <button onclick="updateTableRow();">Update</button>
+            <button onclick="deleteTableRow();">Delete</button>
+            
+            
+        </div>
+    </div>
+    <script>
+
+
+        var rIndex,
+        table = document.getElementById("table");
+
+        function ReadDb()
+        {
+            var newRow = table.insertRow(table.length);
+            cell1 = newRow.insertCell(0);
+            cell2 = newRow.insertCell(1);
+            cell3 = newRow.insertCell(2);
+            cell4 = newRow.insertCell(3);
+
+            id = document.getElementById("id").value,
+            fname = document.getElementById("fname").value,
+            lname = document.getElementById("lname").value,
+            age = document.getElementById("age").value;
+
+            cell1.innerHTML = id;
+            cell2.innerHTML = fname;
+            cell3.innerHTML = lname;
+            cell4.innerHTML = age;
+            selectedRow();
+        }
+
+        function addTableRow()
+        {
+            var newRow = table.insertRow(table.length);
+            cell1 = newRow.insertCell(0);
+            cell2 = newRow.insertCell(1);
+            cell3 = newRow.insertCell(2);
+            cell4 = newRow.insertCell(3);
+
+            id = document.getElementById("id").value,
+            fname = document.getElementById("fname").value,
+            lname = document.getElementById("lname").value,
+            age = document.getElementById("age").value;
+
+            cell1.innerHTML = id;
+            cell2.innerHTML = fname;
+            cell3.innerHTML = lname;
+            cell4.innerHTML = age;
+            selectedRow();
+        }
+
+        
+
+        function addPos()
+        {
+            var newRow = table.insertRow(rIndex);
+            cell1 = newRow.insertCell(0);
+            cell2 = newRow.insertCell(1);
+            cell3 = newRow.insertCell(2);
+            cell4 = newRow.insertCell(3);
+
+            id = document.getElementById("id").value,
+            fname = document.getElementById("fname").value,
+            lname = document.getElementById("lname").value,
+            age = document.getElementById("age").value;
+
+            cell1.innerHTML = id;
+            cell2.innerHTML = fname;
+            cell3.innerHTML = lname;
+            cell4.innerHTML = age;
+
+        }
+
+
+        function selectedRow()
+        {
+            for (var i = 1; i < table.rows.length; i++)
+            {
+                table.rows[i].onclick = function ()
+                {
+                    rIndex = this.rowIndex;
+                    
+                    document.getElementById("id").value = this.cells[0].innerHTML;
+                    document.getElementById("fname").value = this.cells[1].innerHTML;
+                    document.getElementById("lname").value = this.cells[2].innerHTML;
+                    document.getElementById("age").value = this.cells[3].innerHTML;
+                };
+            }
+        }
+        selectedRow();
+        function updateTableRow()
+        {
+            var id =  document.getElementById("id").value,
+            fname =  document.getElementById("fname").value,
+            lname =  document.getElementById("lname").value,
+            age =  document.getElementById("age").value;
+    //table.rows[rIndex].cells[0].innerHTML = id;
+    table.rows[rIndex].cells[1].innerHTML = fname;
+    table.rows[rIndex].cells[2].innerHTML = lname;
+    table.rows[rIndex].cells[3].innerHTML = age;
+}
+
+function deleteTableRow()
+{
+    table.deleteRow(rIndex)
+    id =  document.getElementById("id").value="",
+    fname =  document.getElementById("fname").value="",
+    lname =  document.getElementById("lname").value="",
+    age =  document.getElementById("age").value="";
+}
+
+
+
+
+</script>
+</body>
+</html>
